@@ -23,17 +23,31 @@
     animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
-  .delay-1 { animation-delay: 0.1s; }
-  .delay-2 { animation-delay: 0.25s; }
-  .delay-3 { animation-delay: 0.4s; }
-  .delay-4 { animation-delay: 0.55s; }
-  .delay-5 { animation-delay: 0.7s; }
+  .delay-1 {
+    animation-delay: 0.1s;
+  }
+
+  .delay-2 {
+    animation-delay: 0.25s;
+  }
+
+  .delay-3 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-4 {
+    animation-delay: 0.55s;
+  }
+
+  .delay-5 {
+    animation-delay: 0.7s;
+  }
 
   .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .reveal.visible {
@@ -52,16 +66,154 @@
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(28px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes subtlePulse {
-  0%, 100% { opacity: 0.5; }
-  50%      { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Modern glow background ---------- */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+body::before {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -100px;
+  background: rgba(200, 240, 80, 0.14);
+  animation: orbOne 18s ease-in-out infinite alternate;
+}
+
+body::after {
+  width: 500px;
+  height: 500px;
+  bottom: -150px;
+  right: -100px;
+  background: rgba(99, 102, 241, 0.16);
+  animation: orbTwo 22s ease-in-out infinite alternate;
+}
+
+@keyframes orbOne {
+  to {
+    transform: translate(200px, 120px) scale(1.2);
+  }
+}
+
+@keyframes orbTwo {
+  to {
+    transform: translate(-220px, -140px) scale(1.15);
+  }
+}
+
+/* ---------- Moving hero grid ---------- */
+.hero-grid-bg {
+  animation: gridDrift 30s linear infinite;
+}
+
+@keyframes gridDrift {
+  to {
+    background-position: 60px 60px;
+  }
+}
+
+/* ---------- Button hover ---------- */
+a.bg-accent,
+button.bg-accent {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+a.bg-accent:hover,
+button.bg-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px -8px rgba(200, 240, 80, 0.55);
+}
+
+/* ---------- Card hover ---------- */
+.bg-bg-card {
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bg-bg-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200, 240, 80, 0.35);
+  box-shadow: 0 20px 60px -20px rgba(200, 240, 80, 0.25);
+}
+
+/* ---------- Shimmering gradient text (used in step 4) ---------- */
+.text-shimmer {
+  background: linear-gradient(90deg, #ffffff, #c8f050, #ffffff);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Respect users who turn off motion */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---------- Reveal directions ---------- */
+.reveal.reveal-left:not(.visible) {
+  transform: translateX(-32px);
+}
+
+.reveal.reveal-right:not(.visible) {
+  transform: translateX(32px);
+}
+
+.reveal.reveal-scale:not(.visible) {
+  transform: scale(0.94);
+}
+
+.reveal.reveal-none:not(.visible) {
+  transform: none;
 }

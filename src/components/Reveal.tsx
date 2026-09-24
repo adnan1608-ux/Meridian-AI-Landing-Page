@@ -1,39 +1,27 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
+import { useInView } from '../hooks/useInView';
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  direction?: 'up' | 'left' | 'right' | 'scale' | 'none';
 };
 
-export function Reveal({ children, className = '', delay = 0 }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+export function Reveal({
+  children,
+  className = '',
+  delay = 0,
+  direction = 'up',
+}: RevealProps) {
+  const { ref, inView } = useInView<HTMLDivElement>(0.12);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const directionClass = direction === 'up' ? '' : `reveal-${direction}`;
 
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? 'visible' : ''} ${className}`}
+      className={`reveal ${directionClass} ${inView ? 'visible' : ''} ${className}`}
       style={delay ? { transitionDelay: `${delay}ms` } : undefined}
     >
       {children}
