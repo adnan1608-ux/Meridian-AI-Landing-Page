@@ -11,11 +11,11 @@ export function FounderNote() {
         </p>
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-accent-dim border border-[rgba(200,240,77,0.15)] flex items-center justify-center text-[13px] font-semibold text-accent">
-            AK
+            A.N
           </div>
           <div>
             <div className="text-sm font-semibold text-text-primary">
-              Adnan Khan
+              A.N
             </div>
             <div className="text-xs text-text-tertiary">
               Founder, Meridian Automation
