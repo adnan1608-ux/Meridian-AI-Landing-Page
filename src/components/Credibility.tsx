@@ -1,3 +1,4 @@
+import { Truck, HeartPulse, ShieldCheck, Building2, Factory } from 'lucide-react';
 import { Reveal } from './Reveal';
 
 const stats = [
@@ -6,7 +7,13 @@ const stats = [
   { number: '93%', accent: true, label: 'Of projects shipped within the first 30-day sprint' },
 ];
 
-const logos = ['Northwind Logistics', 'Cobalt Health', 'Verge Insurance', 'Lighthouse RE', 'Bastion Mfg'];
+const logos = [
+  { name: 'Northwind Logistics', icon: Truck },
+  { name: 'Cobalt Health', icon: HeartPulse },
+  { name: 'Verge Insurance', icon: ShieldCheck },
+  { name: 'Lighthouse RE', icon: Building2 },
+  { name: 'Bastion Mfg', icon: Factory },
+];
 
 export function Credibility() {
   return (
@@ -48,14 +55,18 @@ export function Credibility() {
             <span className="text-xs text-text-muted uppercase tracking-[0.08em] mr-2">
               Trusted by
             </span>
-            {logos.map((logo, i) => (
-              <span
-                key={i}
-                className="bg-bg-card border border-border rounded-lg px-5 py-2.5 text-[13px] text-text-tertiary font-medium tracking-tight transition-colors hover:border-[#333] hover:text-text-secondary"
-              >
-                {logo}
-              </span>
-            ))}
+            {logos.map((logo, i) => {
+              const Icon = logo.icon;
+              return (
+                <span
+                  key={i}
+                  className="inline-flex items-center gap-2 bg-bg-card border border-border rounded-lg px-5 py-2.5 text-[13px] text-text-tertiary font-medium tracking-tight transition-colors hover:border-[#333] hover:text-text-secondary"
+                >
+                  <Icon className="w-3.5 h-3.5 text-text-muted" />
+                  {logo.name}
+                </span>
+              );
+            })}
           </div>
         </Reveal>
       </div>

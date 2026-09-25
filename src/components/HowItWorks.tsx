@@ -1,5 +1,6 @@
 import { Search, Wrench, Rocket, LineChart, ChevronRight } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { SystemSchematic } from './SystemSchematic';
 
 const steps = [
   {
@@ -44,6 +45,10 @@ export function HowItWorks() {
             No black boxes. No "trust the AI." You see exactly what each system does, what data
             it touches, and what happens when it fails.
           </p>
+        </Reveal>
+
+        <Reveal className="mb-4">
+          <SystemSchematic />
         </Reveal>
 
         <Reveal>
