@@ -1,5 +1,8 @@
+import { useState } from 'react';
 import { Check, Sparkles } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { FounderNote } from './FounderNote';
+import { DiagnosisForm } from './DiagnosisForm';
 
 const includes = [
   'Full workflow map of your operation\'s repetitive tasks',
@@ -17,6 +20,8 @@ const cardItems = [
 ];
 
 export function AuditOffer() {
+  const [formOpen, setFormOpen] = useState(false);
+
   return (
     <section id="audit" className="bg-bg-primary py-[120px]">
       <div className="max-w-container mx-auto px-8">
@@ -73,19 +78,24 @@ export function AuditOffer() {
                 ))}
               </ul>
 
-              <a
-                href="#final-cta"
+              <button
+                type="button"
+                onClick={() => setFormOpen(true)}
                 className="inline-flex items-center gap-2.5 bg-accent text-bg-primary text-sm font-semibold px-8 py-4 rounded-[10px] transition-all hover:bg-[#d4f55a] hover:-translate-y-px hover:shadow-[0_8px_32px_rgba(200,240,77,0.2)]"
               >
                 Book your audit
-              </a>
+              </button>
               <p className="text-xs text-text-tertiary mt-4">
                 Limited to 5 audits per month. Q1 2026 slots open now.
               </p>
             </div>
           </Reveal>
         </div>
+
+        <FounderNote />
       </div>
+
+      <DiagnosisForm open={formOpen} onClose={() => setFormOpen(false)} />
     </section>
   );
 }

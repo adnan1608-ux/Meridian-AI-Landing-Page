@@ -1,6 +1,11 @@
 import { ArrowRight } from 'lucide-react';
+import { useTypewriterCycle } from '../hooks/useTypewriterCycle';
+
+const painPoints = ['Data Entry', 'CRM Syncing', 'Email Sorting', 'Invoice Matching'];
 
 export function Hero() {
+  const cycling = useTypewriterCycle(painPoints);
+
   return (
     <section
       id="hero"
@@ -27,6 +32,18 @@ export function Hero() {
         <h1 className="animate-fade-up delay-1 font-serif text-[clamp(44px,6vw,76px)] leading-[1.08] tracking-tight text-text-primary mb-7">
           AI automation for <em className="italic text-text-secondary">real</em> operations.
         </h1>
+
+        <p className="animate-fade-up delay-2 text-[15px] text-text-tertiary mb-8 h-6">
+          Your team is spending hours on{' '}
+          <span className="text-accent font-medium">
+            {cycling}
+            <span
+              className="inline-block w-[1px] h-[1em] bg-accent ml-0.5 align-middle"
+              style={{ animation: 'subtlePulse 0.8s step-end infinite' }}
+            />
+          </span>{' '}
+          that shouldn't require a human.
+        </p>
 
         <p className="animate-fade-up delay-2 text-[clamp(17px,2vw,20px)] text-text-secondary leading-[1.65] max-w-[580px] mb-13 font-normal">
           We design and deploy AI systems that handle repetitive work – data entry, document
